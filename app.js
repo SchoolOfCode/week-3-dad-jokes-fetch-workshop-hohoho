@@ -1,5 +1,6 @@
 // Hardcoded array of joke objects
 // Each joke object has a unique id
+/*
 const jokes = [
   {
     id: "A1bC2D",
@@ -54,18 +55,49 @@ const jokes = [
     joke: "What did the grape say when it got stepped on? Nothing, it just let out a little wine!",
   },
 ];
+*/
 
 // Main function to retrieve and display a new joke
-function getAndDisplayNewJoke() {
-  const joke = retrieveJoke();
+async function getAndDisplayNewJoke() {
+  const joke = await retrieveJoke();
   displayJoke(joke);
 }
 
+/*
 // Function to retrieve a random joke
+// we want to replace this function with one that uses API
 function retrieveJoke() {
   const randomIndex = Math.floor(Math.random() * jokes.length);
   return jokes[randomIndex];
 }
+*/
+
+// Function to retrieve a random joke from API
+async function retrieveJoke() {
+  // ask the API for info via the url 
+  // convert to JSON format
+  // return the text of the joke
+
+//"User-Agent: My Library (https://github.com/username/repo)"
+
+  const jokeResponse = await fetch("https://icanhazdadjoke.com/", {
+    headers: {
+      Accept: 'application/json',
+      'User-Agent': 'https://github.com/SchoolOfCode/week-3-dad-jokes-fetch-workshop-hohoho',
+    },
+});
+  const jokeData = await jokeResponse.json();
+
+  //console.log(jokeData.joke); 
+  console.log(jokeData);
+  return jokeData;
+
+}
+
+
+
+
+
 
 // Function to update the DOM with the provided joke
 function displayJoke(joke) {
